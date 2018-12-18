@@ -1,0 +1,72 @@
+﻿@model Todo.Dto.TaskDto
+@{
+    List<SelectListItem> statusDropDown = new List<SelectListItem>();
+    List<SelectListItem> photoDropdown = new List<SelectListItem>();
+    statusDropDown.Add(new SelectListItem()
+    {
+        Text = "Pending",
+        Value = "Pending"
+    });
+    statusDropDown.Add(new SelectListItem()
+    {
+        Text = "Done",
+        Value = "Done"
+    });
+    statusDropDown.Add(new SelectListItem()
+    {
+        Text = "Canceled",
+        Value = "Canceled"
+    });
+
+    photoDropdown.Add(new SelectListItem()
+    {
+        Text = "Mario Avatar",
+        Value = @"G:\Projects\Personal-Projects\TodoWebApp\Todo.Data\Content\imgs\Mario.png"
+    });
+    photoDropdown.Add(new SelectListItem()
+    {
+        Text = "Chrisi Avatar",
+        Value = @"G:\Projects\Personal-Projects\TodoWebApp\Todo.Data\Content\imgs\Chris.png"
+    });
+}
+
+<div class="container">
+    <div class="row">
+        <section>
+            @using (Html.BeginForm("Add", "Home", FormMethod.Post))
+            {
+                <h1 style="text-align: center; margin-right: 31%;color:whitesmoke">
+                    Add Todo
+                    <span class="dropdown pull-right" style="margin-left: 10%">@Html.DropDownListFor(model => model.UserPhoto, photoDropdown, new { @class = "form-control" })</span>
+                </h1>
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <div class="form_main">
+                                            @Html.TextAreaFor(m => m.Content, new { placeholder = "Input your content", @class = "txt_3" })
+
+                                            @Html.TextBoxFor(m => m.Name, new { placeholder = "Input Todo Name", @class = "txt form-control" })
+
+                                            @Html.TextBoxFor(m => m.FinalDate, new { placeholder = "Input a Date in month/day/year format", @class = "txt form-control" })
+
+                                            <div class="dropdown stausdrop">@Html.DropDownListFor(model => model.Status, statusDropDown, new { @class = "form-control" })</div>
+                                            <div class="dropdown" style="margin-right: 50%">@Html.EnumDropDownListFor(model => model.Importance, new { @class = "form-control" })</div>
+                                            <br/>
+                                            <div>@Html.ValidationSummary("", new { @class = "text-danger", style = "margin-right: 50%" })</div>
+                                            <br />
+                                            <input type="submit" value="Add" class="txt2">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+</div>

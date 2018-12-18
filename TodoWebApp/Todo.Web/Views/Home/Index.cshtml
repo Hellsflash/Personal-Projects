@@ -1,0 +1,106 @@
+﻿@using Todo.Dto.Enums
+@model List<Todo.Dto.TaskDto>
+<div class="container">
+    <div class="row">
+        <section>
+            <h1 style="text-align: center; margin-right: 44%;color:whitesmoke">
+                My Todo Table
+                <button class="btn btn-primary pull-right" style="margin-right: -46%" type="submit" onclick="location.href = '@Url.Action("Add", "Home")'">Add Todo</button>
+            </h1>
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="text-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success" id="Done" onclick="filter()">Done</button>
+                                <button type="button" class="btn btn-warning" id="Pending" onclick="filter()">Pending</button>
+                                <button type="button" class="btn btn-danger" id="Canceled" onclick="filter()">Canceled</button>
+                                <button type="button" class="btn btn-default active" id="all" onclick="filter()">Todos</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table" style="width: 100%">
+                            <tbody id="parent">
+                                @foreach (var m in Model)
+                                {
+
+                                    string path = m.UserPhoto;
+                                    FileStream fs = new FileStream(path, FileMode.Open);
+                                    byte[] data = new byte[fs.Length];
+                                    fs.Read(data, 0, data.Length);
+
+                                    var base64 = Convert.ToBase64String(data);
+                                    var img = $"data:image/png;base64,{base64}";
+
+                                    fs.Close();
+
+                                    <tr class="@m.Status">
+                                        <td>
+                                            <div class="media">
+                                                <a class="pull-left">
+                                                    <img src="@img" class="media-photo">
+                                                </a>
+                                                <div class="media-body">
+                                                    <span class="media-meta pull-right">@m.FinalDate.ToShortDateString()</span>
+                                                    <h4 class="title">
+                                                        @m.Name
+                                                        @switch (m.Status)
+                                                        {
+                                                            case "Pending":
+                                                                <span class="pull-right" style="color: #f0ad4e !important">@m.Status</span>
+                                                                break;
+                                                            case "Done":
+                                                                <span class="pull-right" style="color: #5cb85c !important">@m.Status</span>
+                                                                break;
+                                                            case "Canceled":
+                                                                <span class="pull-right" style="color: #d9534f !important">@m.Status</span>
+                                                                break;
+                                                        }
+
+                                                        @switch (m.Importance)
+                                                        {
+                                                            case (ImportanceEnum)0:
+                                                                <span class="pull-right" style="color:#5cb85c">@Html.LabelFor(model => m.Importance, "Not Important")</span>
+                                                                break;
+                                                            case (ImportanceEnum)1:
+                                                                <span class="pull-right" style="color:#f0ad4e">@Html.LabelFor(model => m.Importance, "Little Importance")</span>
+                                                                break;
+                                                            case (ImportanceEnum)2:
+                                                                <span class="pull-right" style="color:#ff4500">@Html.LabelFor(model => m.Importance, "Medium Importance")</span>
+                                                                break;
+                                                            case (ImportanceEnum)3:
+                                                                <span class="pull-right" style="color:#d9534f">@Html.LabelFor(model => m.Importance, "Big Importance")</span>
+                                                                break;
+
+                                                        }
+
+                                                    </h4>
+                                                    <p class="summary">@m.Content</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <script>
+                            function filter() {
+                                var btns = $('.btn').click(function () {
+                                    if (this.id === "all") {
+                                        $('#parent > tr').fadeIn(450);
+                                    } else {
+                                        var el = $('.' + this.id).fadeIn(450);
+                                        $('#parent> tr').not(el).hide();
+                                    }
+                                    btns.removeClass('active');
+                                    $(this).addClass('active');
+                                });
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,123 @@
+﻿body, html{
+    padding-top: 50px;
+    padding-bottom: 20px;
+    height: 100%;
+}
+
+.bg {
+    background-image: url(https://i.ytimg.com/vi/hF_LjTUvP-U/maxresdefault.jpg) !important;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+button {
+    width: 100px
+}
+
+.media-photo {
+    width: 35px
+}
+
+.media-meta {
+    font-size: 15px;
+    color: #999;
+}
+
+.title {
+    color: #2BBCDE;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: normal;
+    margin: 0;
+}
+
+    .title span {
+        font-size: 15px;
+        margin-right: 20px;
+        color: #32cd32
+    }
+
+.summary {
+    font-size: 14px;
+}
+
+.form {
+    border-radius: 7px;
+    padding: 6px;
+}
+
+.form_main {
+    width: 100%;
+}
+
+    .form_main h4 {
+        font-family: roboto;
+        font-size: 20px;
+        font-weight: 300;
+        margin-bottom: 15px;
+        margin-top: 20px;
+        text-transform: uppercase;
+    }
+
+.txt {
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    padding: 10px 0 10px 5px;
+    width: 100%;
+}
+
+.txt_3 {
+    padding: 10px 0 10px 5px;
+    width: 100%;
+}
+
+.txt2 {
+    background: #242424 none repeat scroll 0 0;
+    border: 1px solid #4f5c04;
+    border-radius: 25px;
+    color: #fff;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 35px;
+    margin: 10px 0;
+    padding: 0;
+    text-transform: uppercase;
+    width: 30%;
+}
+
+textarea {
+    float: right;
+    clear: both;
+    min-width: 289px;
+    max-width: 289px;
+    border-radius: 5px;
+}
+
+.stausdrop {
+    float: right;
+    clear: both;
+    width: 44%;
+}
